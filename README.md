@@ -1,7 +1,7 @@
-# Welcome to your Expo app 👋
+# Welcome to Dribble Auth UI 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
-
+1. [Inspiration From Dribble](https://www.masterji.co/project/5d4c27e0-0cb8-4ad4-8dda-65cd4af6e1e8)
+2. [Video]( https://x.com/KoustavChatter2/status/2053391371625787465?s=20)
 ## Get started
 
 1. Install dependencies
