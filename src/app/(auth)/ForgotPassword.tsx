@@ -1,11 +1,11 @@
+import AntDesign from '@expo/vector-icons/AntDesign';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Link } from 'expo-router';
 import React from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Card from "../../components/Card";
-
 
 const ForgotPassword = () => {
 
@@ -56,6 +56,12 @@ const ForgotPassword = () => {
                 )}
                 style={{ marginTop: 30, borderRadius: 20 }}
             />
+
+            <Pressable style={styles.button}>
+                <Text style={styles.text}>Sign In</Text>
+                <MaterialIcons name='arrow-forward' size={24} color='white' style={{ marginLeft: 10 }} />
+            </Pressable>
+            <AntDesign name="lock" size={140} style={{ position: 'absolute', bottom: -20, left: -40, color: 'gray', opacity: 0.2 }} />
         </SafeAreaView>
     )
 }
@@ -63,6 +69,11 @@ const ForgotPassword = () => {
 export default ForgotPassword
 
 const styles = StyleSheet.create({
+    text: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
     container: {
         flex: 1,
         justifyContent: 'center',
@@ -91,6 +102,17 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         marginTop: 20,
         marginBottom: 20,
+    },
+    button: {
+        backgroundColor: '#66c432',
+        padding: 10,
+        borderRadius: 5,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '90%',
+        alignSelf: 'center',
+        marginBottom: 100,
     }
 
 })
