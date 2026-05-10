@@ -3,6 +3,8 @@ import { Link, router } from 'expo-router';
 import React from 'react';
 import { Image, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 export default function SignIn() {
 
     const [email, setEmail] = React.useState('');
@@ -17,73 +19,27 @@ export default function SignIn() {
     const [passwordMatch, setPasswordMatch] = React.useState(true);
 
     return (
-        <KeyboardAwareScrollView
-            style={{ flex: 1 }}
-            contentContainerStyle={{ flexGrow: 1 }}
-            keyboardShouldPersistTaps="handled"
-            enableOnAndroid={true}          // ← critical for Android
-            extraScrollHeight={20}          // ← extra space above keyboard
-            showsVerticalScrollIndicator={false}
-        >
+        <SafeAreaView style={{ flex: 1, width: '100%', height: '100%' }}>
+            <KeyboardAwareScrollView
+                style={{ flex: 1 }}
+                contentContainerStyle={{ flexGrow: 1 }}
+                keyboardShouldPersistTaps="handled"
+                enableOnAndroid={true}          // ← critical for Android
+                extraScrollHeight={20}          // ← extra space above keyboard
+                showsVerticalScrollIndicator={false}
+            >
 
 
 
-            <View style={styles.container}>
-                <View style={styles.logoContainer}>
-                    <Image source={require('../../assets/logo-bg-removed.png')} style={styles.logo} />
+                <View style={styles.container}>
+                    <View style={styles.logoContainer}>
+                        <Image source={require('../../assets/logo-bg-removed.png')} style={styles.logo} />
 
-                    <Text style={styles.heading}>Sign Up For Free</Text>
-                    <Text style={styles.subHeading}>Sign up in 1 minute for free!</Text>
-                </View>
-                <Text style={{ fontWeight: 'bold', fontSize: 16, marginBottom: 10, marginLeft: 10 }}>Email Address</Text>
-                <View style={[styles.inputContainer, isEmailFocused ? {
-                    borderColor: '#66c432',
-                    borderWidth: 2,
-                    shadowOpacity: 0.2
-                } : {
-                    borderColor: '#e0e0e0',
-                    shadowOpacity: 0
-                }]}>
-
-                    <MaterialIcons name='email' size={24} color='black' />
-                    <TextInput placeholder='Enter your email' value={email} onChangeText={setEmail}
-                        onFocus={() => setIsEmailFocused(true)}
-                        onBlur={() => setIsEmailFocused(false)}
-                        style={{
-                            width: '60%'
-                        }}
-                    />
-                </View>
-                <View>
-                    <Text style={{ fontWeight: 'bold', fontSize: 16, marginBottom: 10, marginLeft: 10 }}>Password</Text>
-                    <View style={[styles.inputContainer, isPasswordFocused ? {
-                        borderColor: '#66c432',
-                        borderWidth: 2,
-                        shadowOpacity: 0.2
-                    } : {
-                        borderColor: '#e0e0e0',
-                        shadowOpacity: 0
-                    }, !passwordMatch && { borderColor: 'red', borderWidth: 2 }]}>
-                        <MaterialIcons name='lock' size={24} color='black' />
-                        <TextInput placeholder='Enter your password'
-                            value={password}
-                            onChangeText={setPassword}
-                            onFocus={() => setIsPasswordFocused(true)}
-                            onBlur={() => setIsPasswordFocused(false)}
-                            secureTextEntry={!showPassword}
-                            style={{ width: '60%' }}
-                        />
-
-                        <Pressable onPress={() => setShowPassword(!showPassword)}>
-                            <MaterialIcons name={showPassword ? 'visibility' : 'visibility-off'} style={{ paddingLeft: 30, marginLeft: 30 }} size={24} color='black' />
-                        </Pressable>
+                        <Text style={styles.heading}>Sign Up For Free</Text>
+                        <Text style={styles.subHeading}>Sign up in 1 minute for free!</Text>
                     </View>
-                </View>
-
-
-                <View>
-                    <Text style={{ fontWeight: 'bold', fontSize: 16, marginBottom: 10, marginLeft: 10 }}>Confirm Password</Text>
-                    <View style={[styles.inputContainer, isConfirmPasswordFocused ? {
+                    <Text style={{ fontWeight: 'bold', fontSize: 16, marginBottom: 10, marginLeft: 10 }}>Email Address</Text>
+                    <View style={[styles.inputContainer, isEmailFocused ? {
                         borderColor: '#66c432',
                         borderWidth: 2,
                         shadowOpacity: 0.2
@@ -91,53 +47,101 @@ export default function SignIn() {
                         borderColor: '#e0e0e0',
                         shadowOpacity: 0
                     }]}>
-                        <MaterialIcons name='lock' size={24} color='black' />
-                        <TextInput placeholder='Confirm password'
-                            value={confirmPassword}
-                            onChangeText={setConfirmPassword}
-                            onFocus={() => setIsConfirmPasswordFocused(true)}
-                            onBlur={() => setIsConfirmPasswordFocused(false)}
-                            secureTextEntry={!showConfirmPassword}
-                            style={{ width: '60%' }}
+
+                        <MaterialIcons name='email' size={24} color='black' />
+                        <TextInput placeholder='Enter your email' value={email} onChangeText={setEmail}
+                            onFocus={() => setIsEmailFocused(true)}
+                            onBlur={() => setIsEmailFocused(false)}
+                            style={{
+                                width: '60%'
+                            }}
                         />
-
-                        <Pressable onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
-                            <MaterialIcons name={showConfirmPassword ? 'visibility' : 'visibility-off'} style={{ paddingLeft: 30, marginLeft: 30 }} size={24} color='black' />
-                        </Pressable>
                     </View>
-                </View>
-                {
+                    <View>
+                        <Text style={{ fontWeight: 'bold', fontSize: 16, marginBottom: 10, marginLeft: 10 }}>Password</Text>
+                        <View style={[styles.inputContainer, isPasswordFocused ? {
+                            borderColor: '#66c432',
+                            borderWidth: 2,
+                            shadowOpacity: 0.2
+                        } : {
+                            borderColor: '#e0e0e0',
+                            shadowOpacity: 0
+                        }, !passwordMatch && { borderColor: 'red', borderWidth: 2 }]}>
+                            <MaterialIcons name='lock' size={24} color='black' />
+                            <TextInput placeholder='Enter your password'
+                                value={password}
+                                onChangeText={setPassword}
+                                onFocus={() => setIsPasswordFocused(true)}
+                                onBlur={() => setIsPasswordFocused(false)}
+                                secureTextEntry={!showPassword}
+                                style={{ width: '60%' }}
+                            />
 
-                    !passwordMatch && (
-                        <View style={styles.passwordMatchError}>
-                            <Text style={{ color: 'black', fontWeight: 'bold' }}>Error:Passwords do not match!</Text>
+                            <Pressable onPress={() => setShowPassword(!showPassword)}>
+                                <MaterialIcons name={showPassword ? 'visibility' : 'visibility-off'} style={{ paddingLeft: 30, marginLeft: 30 }} size={24} color='black' />
+                            </Pressable>
                         </View>
-                    )
-                }
-
-                <Pressable style={styles.button}
-                    onPress={() => {
-                        if (password !== confirmPassword) {
-                            setPasswordMatch(false);
-                        } else {
-                            setPasswordMatch(true);
-                            router.push('/SignIn');
-                        }
-                    }}
-                >
-                    <Text style={styles.text}>Sign Up</Text>
-                    <MaterialIcons name='arrow-forward' size={24} color='white' style={{ marginLeft: 10 }} />
-                </Pressable>
+                    </View>
 
 
-                <View style={styles.footer}>
-                    <Text>Already have an account?</Text>
-                    <Link href="/SignIn"><Text style={{ color: '#66c432' }}>Sign In</Text></Link>
+                    <View>
+                        <Text style={{ fontWeight: 'bold', fontSize: 16, marginBottom: 10, marginLeft: 10 }}>Confirm Password</Text>
+                        <View style={[styles.inputContainer, isConfirmPasswordFocused ? {
+                            borderColor: '#66c432',
+                            borderWidth: 2,
+                            shadowOpacity: 0.2
+                        } : {
+                            borderColor: '#e0e0e0',
+                            shadowOpacity: 0
+                        }]}>
+                            <MaterialIcons name='lock' size={24} color='black' />
+                            <TextInput placeholder='Confirm password'
+                                value={confirmPassword}
+                                onChangeText={setConfirmPassword}
+                                onFocus={() => setIsConfirmPasswordFocused(true)}
+                                onBlur={() => setIsConfirmPasswordFocused(false)}
+                                secureTextEntry={!showConfirmPassword}
+                                style={{ width: '60%' }}
+                            />
+
+                            <Pressable onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
+                                <MaterialIcons name={showConfirmPassword ? 'visibility' : 'visibility-off'} style={{ paddingLeft: 30, marginLeft: 30 }} size={24} color='black' />
+                            </Pressable>
+                        </View>
+                    </View>
+                    {
+
+                        !passwordMatch && (
+                            <View style={styles.passwordMatchError}>
+                                <Text style={{ color: 'black', fontWeight: 'bold' }}>Error:Passwords do not match!</Text>
+                            </View>
+                        )
+                    }
+
+                    <Pressable style={styles.button}
+                        onPress={() => {
+                            if (password !== confirmPassword) {
+                                setPasswordMatch(false);
+                            } else {
+                                setPasswordMatch(true);
+                                router.push('/SignIn');
+                            }
+                        }}
+                    >
+                        <Text style={styles.text}>Sign Up</Text>
+                        <MaterialIcons name='arrow-forward' size={24} color='white' style={{ marginLeft: 10 }} />
+                    </Pressable>
+
+
+                    <View style={styles.footer}>
+                        <Text>Already have an account?</Text>
+                        <Link href="/SignIn"><Text style={{ color: '#66c432' }}>Sign In</Text></Link>
+                    </View>
+
                 </View>
 
-            </View>
-
-        </KeyboardAwareScrollView>
+            </KeyboardAwareScrollView>
+        </SafeAreaView>
 
     )
 }

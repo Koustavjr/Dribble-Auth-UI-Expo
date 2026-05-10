@@ -7,6 +7,7 @@ import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Card from "../../components/Card";
 
+
 const ForgotPassword = () => {
 
 
@@ -31,7 +32,7 @@ const ForgotPassword = () => {
     const [selected, setSelected] = React.useState<number | null>(null);
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1, width: '100%', height: '100%' }}>
             <View style={styles.back}>
                 <Link href="/SignIn">
                     <Ionicons name="chevron-back" size={24} color="black" />

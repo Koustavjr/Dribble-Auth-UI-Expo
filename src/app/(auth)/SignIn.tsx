@@ -6,6 +6,7 @@ import { Link } from 'expo-router';
 import React from 'react';
 import { Image, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { SafeAreaView } from 'react-native-safe-area-context';
 export default function SignIn() {
 
     const [email, setEmail] = React.useState('');
@@ -15,44 +16,27 @@ export default function SignIn() {
     const [isEmailFocused, setIsEmailFocused] = React.useState(false);
 
     return (
-        <KeyboardAwareScrollView
-            style={{ flex: 1 }}
-            contentContainerStyle={{ flexGrow: 1 }}
-            keyboardShouldPersistTaps="handled"
-            enableOnAndroid={true}          // ← critical for Android
-            extraScrollHeight={20}          // ← extra space above keyboard
-            showsVerticalScrollIndicator={false}
-        >
+        <SafeAreaView style={{ flex: 1, width: '100%', height: '100%' }}>
+            <KeyboardAwareScrollView
+                style={{ flex: 1 }}
+                contentContainerStyle={{ flexGrow: 1 }}
+                keyboardShouldPersistTaps="handled"
+                enableOnAndroid={true}          // ← critical for Android
+                extraScrollHeight={20}          // ← extra space above keyboard
+                showsVerticalScrollIndicator={false}
+            >
 
 
 
-            <View style={styles.container}>
-                <View style={styles.logoContainer}>
-                    <Image source={require('../../assets/logo-bg-removed.png')} style={styles.logo} />
+                <View style={styles.container}>
+                    <View style={styles.logoContainer}>
+                        <Image source={require('../../assets/logo-bg-removed.png')} style={styles.logo} />
 
-                    <Text style={styles.heading}>Sign In</Text>
-                    <Text style={styles.subHeading}>Let's experience the joy of telecare AI.</Text>
-                </View>
-                <Text style={{ fontWeight: 'bold', fontSize: 16, marginBottom: 10, width: '90%', alignSelf: 'center' }}>Email Address</Text>
-                <View style={[styles.inputContainer, isEmailFocused ? {
-                    borderColor: '#66c432',
-                    borderWidth: 2,
-                    shadowOpacity: 0.2
-                } : {
-                    borderColor: '#e0e0e0',
-                    shadowOpacity: 0
-                }]}>
-
-                    <MaterialIcons name='email' size={24} color='black' />
-                    <TextInput placeholder='Enter your email' value={email} onChangeText={setEmail}
-                        onFocus={() => setIsEmailFocused(true)}
-                        onBlur={() => setIsEmailFocused(false)}
-                        style={{ width: '60%', marginLeft: 10, marginRight: 10 }}
-                    />
-                </View>
-                <View>
-                    <Text style={{ fontWeight: 'bold', fontSize: 16, marginBottom: 10, width: '90%', alignSelf: 'center' }}>Password</Text>
-                    <View style={[styles.inputContainer, isPasswordFocused ? {
+                        <Text style={styles.heading}>Sign In</Text>
+                        <Text style={styles.subHeading}>Let's experience the joy of telecare AI.</Text>
+                    </View>
+                    <Text style={{ fontWeight: 'bold', fontSize: 16, marginBottom: 10, width: '90%', alignSelf: 'center' }}>Email Address</Text>
+                    <View style={[styles.inputContainer, isEmailFocused ? {
                         borderColor: '#66c432',
                         borderWidth: 2,
                         shadowOpacity: 0.2
@@ -60,50 +44,69 @@ export default function SignIn() {
                         borderColor: '#e0e0e0',
                         shadowOpacity: 0
                     }]}>
-                        <MaterialIcons name='lock' size={24} color='black' />
-                        <TextInput placeholder='Enter your password'
-                            value={password}
-                            onChangeText={setPassword}
-                            onFocus={() => setIsPasswordFocused(true)}
-                            onBlur={() => setIsPasswordFocused(false)}
-                            secureTextEntry={!showPassword}
-                            style={{ width: '60%' }}
+
+                        <MaterialIcons name='email' size={24} color='black' />
+                        <TextInput placeholder='Enter your email' value={email} onChangeText={setEmail}
+                            onFocus={() => setIsEmailFocused(true)}
+                            onBlur={() => setIsEmailFocused(false)}
+                            style={{ width: '60%', marginLeft: 10, marginRight: 10 }}
                         />
+                    </View>
+                    <View>
+                        <Text style={{ fontWeight: 'bold', fontSize: 16, marginBottom: 10, width: '90%', alignSelf: 'center' }}>Password</Text>
+                        <View style={[styles.inputContainer, isPasswordFocused ? {
+                            borderColor: '#66c432',
+                            borderWidth: 2,
+                            shadowOpacity: 0.2
+                        } : {
+                            borderColor: '#e0e0e0',
+                            shadowOpacity: 0
+                        }]}>
+                            <MaterialIcons name='lock' size={24} color='black' />
+                            <TextInput placeholder='Enter your password'
+                                value={password}
+                                onChangeText={setPassword}
+                                onFocus={() => setIsPasswordFocused(true)}
+                                onBlur={() => setIsPasswordFocused(false)}
+                                secureTextEntry={!showPassword}
+                                style={{ width: '60%' }}
+                            />
 
-                        <Pressable onPress={() => setShowPassword(!showPassword)}>
-                            <MaterialIcons name={showPassword ? 'visibility' : 'visibility-off'} style={{ paddingLeft: 30, marginLeft: 30 }} size={24} color='black' />
-                        </Pressable>
+                            <Pressable onPress={() => setShowPassword(!showPassword)}>
+                                <MaterialIcons name={showPassword ? 'visibility' : 'visibility-off'} style={{ paddingLeft: 30, marginLeft: 30 }} size={24} color='black' />
+                            </Pressable>
+                        </View>
+                    </View>
+
+
+                    <Pressable style={styles.button}>
+                        <Text style={styles.text}>Sign In</Text>
+                        <MaterialIcons name='arrow-forward' size={24} color='white' style={{ marginLeft: 10 }} />
+                    </Pressable>
+
+
+                    <View style={styles.socialIcon}>
+                        <View style={[styles.icon, styles.facebook]}>
+                            <EvilIcons name="sc-facebook" size={30} color="black" />
+                        </View>
+                        <View style={styles.icon}>
+                            <AntDesign name="google" size={24} color="black" />
+                        </View>
+                        <View style={styles.icon}>
+                            <Entypo name="instagram" size={24} color="black" />
+                        </View>
+                    </View>
+                    <View style={styles.footer}>
+                        <Text>Don't have an account?</Text>
+                        <Link href="/SignUp"><Text style={{ color: '#66c432', }}>Sign Up</Text></Link>
+                    </View>
+                    <View style={styles.footer}>
+                        <Link href="/ForgotPassword"><Text style={{ color: '#66c432', textDecorationLine: 'underline' }}>Forgot your password?</Text></Link>
                     </View>
                 </View>
 
-
-                <Pressable style={styles.button}>
-                    <Text style={styles.text}>Sign In</Text>
-                    <MaterialIcons name='arrow-forward' size={24} color='white' style={{ marginLeft: 10 }} />
-                </Pressable>
-
-
-                <View style={styles.socialIcon}>
-                    <View style={[styles.icon, styles.facebook]}>
-                        <EvilIcons name="sc-facebook" size={30} color="black" />
-                    </View>
-                    <View style={styles.icon}>
-                        <AntDesign name="google" size={24} color="black" />
-                    </View>
-                    <View style={styles.icon}>
-                        <Entypo name="instagram" size={24} color="black" />
-                    </View>
-                </View>
-                <View style={styles.footer}>
-                    <Text>Don't have an account?</Text>
-                    <Link href="/SignUp"><Text style={{ color: '#66c432', }}>Sign Up</Text></Link>
-                </View>
-                <View style={styles.footer}>
-                    <Link href="/ForgotPassword"><Text style={{ color: '#66c432', textDecorationLine: 'underline' }}>Forgot your password?</Text></Link>
-                </View>
-            </View>
-
-        </KeyboardAwareScrollView>
+            </KeyboardAwareScrollView>
+        </SafeAreaView>
 
     )
 }
@@ -113,6 +116,7 @@ const styles = StyleSheet.create({
         flex: 1,
         // padding: 20,
         // paddingBottom: 30
+        //backgroundColor: 'black',
 
 
     },
